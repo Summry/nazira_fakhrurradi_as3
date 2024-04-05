@@ -18,7 +18,6 @@ variable "sn_1_cidr" {
 
 variable "availability_zone" {
   description = "value of the availability zone"
-  default = "us-west-2a"
 }
 
 variable "default_route" {

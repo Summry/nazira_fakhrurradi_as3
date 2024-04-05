@@ -9,3 +9,7 @@ variable "region" {
 variable "ssh_key_name" {
   description = "value of the ssh key name"
 }
+
+variable "availability_zone" {
+  description = "value of the availability zone"
+}
