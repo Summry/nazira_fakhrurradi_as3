@@ -1,12 +1,12 @@
-terraform {
-  backend "s3" {
-    bucket = "naz-fakh-terraform-state-backend"
-    key    = "terraform.tfstate"
-    region = var.region
-    encrypt = true
-    dynamodb_table = "naz-fakh-terraform-state-lock"
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket = "naz-fakh-terraform-state-backend"
+#     key    = "terraform.tfstate"
+#     region = "us-west-2"
+#     encrypt = true
+#     dynamodb_table = "naz-fakh-terraform-state-lock"
+#   }
+# }
 
 resource "aws_s3_bucket" "terraform-backend" {
 	bucket = "naz-fakh-terraform-state-backend"

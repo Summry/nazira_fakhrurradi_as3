@@ -7,7 +7,7 @@ module "vpc" {
 
 module "ec2" {
   source = "./modules/tf_ec2"
-  sg_id = module.sg.sg_id
+  sg_id = module.sg.sg_1_id
   subnet_id = module.vpc.sn_1_id
   region = var.region
   project_name = var.project_name

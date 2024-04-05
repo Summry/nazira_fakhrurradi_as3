@@ -2,19 +2,18 @@
 # The AWS provider version 4.16 or later and the Local provider version 2.1 or later are required.
 
 terraform {
-  backend "s3" {
-    bucket = "naz-fakh-terraform-state-backend"
-    key    = "terraform.tfstate"
-    region = var.region
-    encrypt = true
-    dynamodb_table = "naz-fakh-terraform-state-lock"
-  }
+  # backend "s3" {
+  #   bucket = "naz-fakh-terraform-state-backend"
+  #   key    = "terraform.tfstate"
+  #   region = var.region
+  #   encrypt = true
+  #   dynamodb_table = "naz-fakh-terraform-state-lock"
+  # }
   required_providers {
     aws = {
       source = "hashicorp/aws"
       version = "~> 5.4.0"
     }
-    required_version = ">= 1.3.0"  
   }
 }
 
