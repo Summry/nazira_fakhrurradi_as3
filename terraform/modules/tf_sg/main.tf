@@ -63,7 +63,7 @@ resource "aws_vpc_security_group_ingress_rule" "almost_private_ingress_rule_ssh"
   from_port = 22
   to_port = 22
   ip_protocol = "tcp"
-  cidr_ipv4 = var.vpc_id
+  cidr_ipv4 = var.vpc_cidr
   tags = {
     Name = "almost_private_ingress_rule_ssh"
     Project = var.project_name
