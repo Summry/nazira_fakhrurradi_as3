@@ -12,18 +12,6 @@
 git clone https://github.com/Summry/nazira_fakhrurradi_as3.git
 ```
 
-2. Run the following command to install the required roles:
-
-```bash
-ansible-galaxy install -r requirements.yml
-```
-
-3. Run the following command to install the required collections:
-
-```bash
-ansible-galaxy collection install -r requirements.yml
-```
-
 ## Usage
 
 1. Run the following command to create the infrastructure:
