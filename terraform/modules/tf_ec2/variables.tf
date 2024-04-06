@@ -51,3 +51,7 @@ variable "ssh_private_key_path" {
   default = "~/.ssh/4640_key"
 }
 
+variable "ansible_user" {
+  description = "value of the ansible user"
+  default = "ubuntu"
+}

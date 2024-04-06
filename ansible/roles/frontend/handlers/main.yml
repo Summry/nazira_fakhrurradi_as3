@@ -1,6 +1,6 @@
 ---
 # handlers file for frontend
-- name: restart nginx
+- name: restart nginx service
   ansible.builtin.systemd_service:
     name: nginx
     state: restarted
