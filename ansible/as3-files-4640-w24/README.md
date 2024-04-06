@@ -7,6 +7,7 @@
   - service file for backend, hello-server.service
     - service file includes info about where the binary should be on your server
   - caddy file(this just exposes the backend on port 80), Caddyfile
+
 - frontend:
   - frontend, index.html
   - nginx configuration file, hello.conf

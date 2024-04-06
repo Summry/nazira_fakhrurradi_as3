@@ -1,0 +1,57 @@
+---
+# tasks file for backend
+- name: Install required packages (curl, unzip, etc...)
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - debian-archive-keyring
+    - debian-keyring
+  tags: 
+    - packages
+    - initial
+
+- name: Install Caddy
+  ansible.builtin.apt:
+    name: caddy
+    state: present
+  tags: 
+    - packages
+    - caddy
+
+- name: Start and Enable Caddy
+  ansible.builtin.systemd:
+    name: caddy
+    enabled: yes
+    state: started
+  tags: 
+    - service
+    - caddy
+
+- name: Copy Caddyfile service
+  ansible.builtin.copy:
+    src: ../files/Caddyfile
+    dest: /etc/caddy/Caddyfile
+  notify: restart caddy service
+  tags: 
+    - service
+    - caddy
+
+- name: Copy compiled binary
+  ansible.builtin.copy:
+    src: ../files/hello-server
+    dest: /var/www/backend/hello-server
+  tags: 
+    - binary
+    - app
+
+- name: Copy service file
+  ansible.builtin.copy:
+    src: ../files/hello-server.service
+    dest: /etc/systemd/system/hello-server.service
+  notify: restart backend service
+  tags: 
+    - service
+    - app

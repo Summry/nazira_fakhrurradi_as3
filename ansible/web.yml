@@ -1,0 +1,30 @@
+---
+- name: Configure Frontend and Backend Servers
+  hosts: all
+  become: true
+  vars:
+    service_name: hello-server.service
+    binary_name: hello-server
+
+  tasks:
+    - name: Install required packages (curl, unzip, etc...)
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - curl
+        - unzip
+        - acl
+    
+    - name: Create tmp dir for ansible 
+      ansible.builtin.file:
+        path: ~/.ansible/tmp
+        state: directory
+        mode: "1777"
+        owner: root
+        group: root
+        
+  roles:
+    - frontend
+    - backend

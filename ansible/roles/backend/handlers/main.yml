@@ -1,0 +1,11 @@
+---
+# handlers file for backend
+- name: restart caddy service
+  ansible.builtin.systemd_service:
+    name: caddy
+    state: restarted
+
+- name: restart backend service
+  ansible.builtin.systemd_service:
+    name: hello-server
+    state: restarted
