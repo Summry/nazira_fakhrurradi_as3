@@ -9,15 +9,19 @@
     - apt-transport-https
     - debian-archive-keyring
     - debian-keyring
-  tags: 
+  tags:
     - packages
     - initial
 
 - name: Install Caddy
-  ansible.builtin.apt:
-    name: caddy
-    state: present
-  tags: 
+  ansible.builtin.shell: |
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+    apt update
+    apt install caddy
+  args:
+    creates: /usr/bin/caddy
+  tags:
     - packages
     - caddy
 
@@ -26,7 +30,7 @@
     name: caddy
     enabled: yes
     state: started
-  tags: 
+  tags:
     - service
     - caddy
 
@@ -35,7 +39,7 @@
     src: ../files/Caddyfile
     dest: /etc/caddy/Caddyfile
   notify: restart caddy service
-  tags: 
+  tags:
     - service
     - caddy
 
@@ -43,7 +47,7 @@
   ansible.builtin.copy:
     src: ../files/hello-server
     dest: /var/www/backend/hello-server
-  tags: 
+  tags:
     - binary
     - app
 
@@ -52,6 +56,6 @@
     src: ../files/hello-server.service
     dest: /etc/systemd/system/hello-server.service
   notify: restart backend service
-  tags: 
+  tags:
     - service
     - app
