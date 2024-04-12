@@ -18,10 +18,28 @@
     - initial
 
 - name: Copy nginx configuration file
-  ansible.builtin.copy:
-    src: ../files/hello.conf
-    dest: /etc/nginx/hello.conf
+  template:
+    src: ../templates/hello.conf.j2
+    dest: /etc/nginx/sites-available/hello.conf
+  tags:
+    - configure
+
+- name: Update the symbolic link of default nginx configuration
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/hello.conf
+    dest: /etc/nginx/sites-enabled/default
+    state: link
   notify: restart nginx service
+  tags:
+    - configure
+
+- name: Create /var/www/frontend directory
+  ansible.builtin.file:
+    path: /var/www/frontend
+    state: directory
+    mode: "0755"
+    owner: root
+    group: www-data
   tags:
     - configure
 

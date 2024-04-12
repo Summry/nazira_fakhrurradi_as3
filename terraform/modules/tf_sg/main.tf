@@ -63,9 +63,22 @@ resource "aws_vpc_security_group_ingress_rule" "almost_private_ingress_rule_ssh"
   from_port = 22
   to_port = 22
   ip_protocol = "tcp"
-  cidr_ipv4 = var.vpc_cidr
+  cidr_ipv4 = var.sg_cidr
   tags = {
     Name = "almost_private_ingress_rule_ssh"
+    Project = var.project_name
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "almost_private_ingress_rule_http" {
+  security_group_id = aws_security_group.almost_private_sg_1.id
+  from_port = 80
+  to_port = 80
+  ip_protocol = "tcp"
+  cidr_ipv4 = var.vpc_cidr
+
+  tags = {
+    Name = "almost_private_ingress_rule_http"
     Project = var.project_name
   }
 }

@@ -14,11 +14,9 @@
     - initial
 
 - name: Install Caddy
-  ansible.builtin.shell: |
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-    apt update
-    apt install caddy
+  ansible.builtin.apt:
+    name: caddy
+    state: present
   args:
     creates: /usr/bin/caddy
   tags:
@@ -42,6 +40,28 @@
   tags:
     - service
     - caddy
+
+- name: Create /var/log/hello-server directory
+  ansible.builtin.file:
+    path: /var/log/hello-server
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+  tags:
+    - configure
+    - app
+
+- name: Create /var/www/backend directory
+  ansible.builtin.file:
+    path: /var/www/backend
+    state: directory
+    mode: "0755"
+    owner: root
+    group: www-data
+  tags:
+    - configure
+    - app
 
 - name: Copy compiled binary
   ansible.builtin.copy:

@@ -52,15 +52,15 @@ resource "aws_dynamodb_table" "terraform-backend" {
 
 resource "local_file" "tf_backend_config" {
 	content = <<EOF
-		terraform {
-			backend "s3" {
-				bucket = "${aws_s3_bucket.terraform-backend.bucket}"
-				key = "terraform.tfstate"
-				region = "us-west-2"
-				dynamodb_table = "${aws_dynamodb_table.terraform-backend.name}"
-				encrypt = true
-			}
-		}
+terraform {
+	backend "s3" {
+		bucket = "${aws_s3_bucket.terraform-backend.bucket}"
+		key = "terraform.tfstate"
+		region = "us-west-2"
+		dynamodb_table = "${aws_dynamodb_table.terraform-backend.name}"
+		encrypt = true
+	}
+}
 	EOF
 	filename = "${path.module}/../backend_config.tf"
 }

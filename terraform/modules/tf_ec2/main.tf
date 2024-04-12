@@ -47,9 +47,9 @@ resource "local_file" "inventory" {
       ansible_user: ${var.ansible_user}
       ansible_ssh_private_key_file: ${var.ssh_private_key_path}
     hosts:
-      public_instance:
+      frontend:
         ansible_host: ${aws_instance.public_instance.public_dns}
-      almost_private_instance:
+      backend:
         ansible_host: ${aws_instance.almost_private_instance.public_dns}
   EOF
 
@@ -59,7 +59,7 @@ resource "local_file" "inventory" {
 resource "local_file" "ansible_config" {
   content = <<-EOT
   [defaults]
-  inventory = inventory.yml
+  inventory = inventory.yaml
   stdout_callback = yaml
 
   [ssh_connection]
