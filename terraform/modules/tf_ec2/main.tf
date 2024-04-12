@@ -51,6 +51,7 @@ resource "local_file" "inventory" {
         ansible_host: ${aws_instance.public_instance.public_dns}
       backend:
         ansible_host: ${aws_instance.almost_private_instance.public_dns}
+        nginx_host: ${aws_instance.almost_private_instance.private_ip}
   EOF
 
   filename = "${path.root}/../ansible/inventory.yaml"

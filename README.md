@@ -33,7 +33,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/4640_key -C "<email>"
 aws configure
 ```
 
-> Now you should be ready
+> Now you should be ready to provision the infrastructure and ansible playbook.
 
 ## Post-setup Configuration
 
@@ -72,6 +72,12 @@ terraform apply
 
 ```bash
 ansible-playbook web.yml
+```
+
+9. To destroy the infrastructure, run the following command:
+
+```bash
+terraform destroy
 ```
 
 # [Go to Top](#acit-4640---assignment-3-ansible-roles-and-terraform-with-remote-servers)

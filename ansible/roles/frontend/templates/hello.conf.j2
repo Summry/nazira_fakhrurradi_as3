@@ -17,7 +17,7 @@ server {
     location /echo {
         # Define the reverse proxy settings
         # edit the line below
-        proxy_pass http://{{ hostvars['backend']['ansible_host'] }}/echo;
+        proxy_pass http://{{ hostvars['backend']['nginx_host'] }}/echo;
         proxy_http_version  1.1;
         proxy_cache_bypass  $http_upgrade;
 

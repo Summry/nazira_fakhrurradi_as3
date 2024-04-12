@@ -17,14 +17,14 @@
   ansible.builtin.apt:
     name: caddy
     state: present
-  args:
-    creates: /usr/bin/caddy
+  # args:
+  #   creates: /usr/bin/caddy
   tags:
     - packages
     - caddy
 
 - name: Start and Enable Caddy
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: caddy
     enabled: yes
     state: started
@@ -58,7 +58,7 @@
     state: directory
     mode: "0755"
     owner: root
-    group: www-data
+    group: ubuntu
   tags:
     - configure
     - app
@@ -67,6 +67,9 @@
   ansible.builtin.copy:
     src: ../files/hello-server
     dest: /var/www/backend/hello-server
+    mode: "0755"
+    owner: root
+    group: ubuntu
   tags:
     - binary
     - app
@@ -75,7 +78,16 @@
   ansible.builtin.copy:
     src: ../files/hello-server.service
     dest: /etc/systemd/system/hello-server.service
-  notify: restart backend service
+  # notify: restart backend service
+  tags:
+    - service
+    - app
+
+- name: start and enable hello-server service
+  ansible.builtin.systemd_service:
+    name: hello-server
+    enabled: yes
+    state: started
   tags:
     - service
     - app
