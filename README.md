@@ -4,6 +4,10 @@
 
 - [x] **Nazira Fakhrurradi**
 
+## Video 
+
+[ACIT 4640 Assignment 3](https://youtu.be/5WQqUbyt0gQ)
+
 ## Installation
 
 1. Clone the repository
