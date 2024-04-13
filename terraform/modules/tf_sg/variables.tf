@@ -1,3 +1,5 @@
+/* variable.tf file is used to define the variables that are used in the module. */
+
 variable "vpc_id" {
   description = "value of the vpc id"
 }

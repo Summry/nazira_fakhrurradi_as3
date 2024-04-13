@@ -3,6 +3,10 @@ provider "aws" {
 }
 
 resource "aws_instance" "public_instance" {
+  /* 
+    This is the public instance that will be accessible from the internet.
+  */
+
   ami = var.ami_id
   instance_type = var.instance_type
   key_name = var.ssh_key_name
@@ -17,6 +21,10 @@ resource "aws_instance" "public_instance" {
 }
 
 resource "aws_instance" "almost_private_instance" {
+  /* 
+    This is the almost private instance that will be accessible from the VPC.
+  */
+
   ami = var.ami_id
   instance_type = var.instance_type
   key_name = var.ssh_key_name
@@ -34,11 +42,6 @@ resource "aws_key_pair" "ssh_key_pair" {
   key_name = var.ssh_key_name
   public_key = file(var.ssh_public_key_path)
 }
-
-# locals {
-#   instance1_public_dns = aws_instance.public_instance.public_dns
-#   instance2_public_dns = aws_instance.almost_private_instance.public_dns
-# }
 
 resource "local_file" "inventory" {
   content = <<-EOF
@@ -67,17 +70,6 @@ resource "local_file" "ansible_config" {
   host_key_checking = False
   ssh_common_args = -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   EOT
-
-  # [defaults]
-  # inventory = inventory
-  # stdout_callback = debug
-
-  # [inventory]
-  # enabled_plugins = aws_ec2
-
-  # [ssh_connection]
-  # host_key_checking = False
-  # ssh_common_args = -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
 
   filename = "${path.root}/../ansible/ansible.cfg"
 }

@@ -1,3 +1,7 @@
+/* 
+  This file is used to output the values of the resources created in the main.tf file.
+*/
+
 output "vpc_id" {
   value = module.vpc.vpc_id
 }

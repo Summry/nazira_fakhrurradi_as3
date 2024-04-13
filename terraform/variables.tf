@@ -1,3 +1,5 @@
+/* Variables */
+
 variable "project_name" {
   description = "value of the project name"
 }

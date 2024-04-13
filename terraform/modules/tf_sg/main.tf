@@ -1,3 +1,5 @@
+/* This file is used to create security groups in AWS */
+
 provider "aws" {
   region = var.region
 }
